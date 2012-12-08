@@ -1,9 +1,12 @@
 package com.josiahebhomenye.algorithm.sort;
 
+import java.security.SecureRandom;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 public class QuickSort2<T extends Comparable<T>> implements Sorter<T> {
+	private static final Random RNG = new SecureRandom();
 
 	@Override
 	public List<T> sort(List<T> list) {
@@ -13,11 +16,8 @@ public class QuickSort2<T extends Comparable<T>> implements Sorter<T> {
 	@Override
 	public List<T> sort(List<T> list, Comparator<T> comparator) {
 		if(list.size() > 1){
-			//int pivotIndex = list.size()/2;
-			int pivotIndex = 0;
-			System.out.println(list + " p: " + pivotIndex);
+			int pivotIndex = RNG.nextInt(list.size());
 			pivotIndex = pattition(0, list.size() - 1, pivotIndex, list, comparator);
-			System.out.println( " New p: " + pivotIndex);
 			sort(split(0, pivotIndex, list), comparator);
 			sort(split(pivotIndex, list.size(), list), comparator);
 		}

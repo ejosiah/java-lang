@@ -19,7 +19,6 @@ import com.josiahebhomenye.Closure;
 import com.josiahebhomenye.Visitor;
 import com.josiahebhomenye.function.Tuple2;
 
-@Ignore
 public class RichListTest {
 	
 	private static final List<Integer> testData1 = Arrays.asList(5, 2, 8, 6, 9, 3, 7, 4, 1, 10);
@@ -82,17 +81,55 @@ public class RichListTest {
 
 	@Test
 	public void testUse() {
-		fail("Not yet implemented");
+		// this test doesn't really make any sense so don't try to understand it :)
+		final List<Integer> expected = Arrays.asList(1, 2, 3, 4 ,5);
+		
+		List<Integer> actual = list.use(new Closure<List<Integer>, List<Integer>>() {
+
+			@Override
+			public List<Integer> call(List<Integer> list) {
+				List<Integer> result = new ArrayList<Integer>();
+				for(Integer item : expected){
+					if(list.contains(item)){
+						result.add(item);
+					}
+				}
+				return result;
+			}
+		});
+		
+		Collections.sort(actual);
+		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testFindAll() {
-		fail("Not yet implemented");
+		List<Integer> expected = Arrays.asList(1, 3, 5, 7, 9); // odd numbers in list
+		
+		List<Integer> actual = list.findAll(new Closure<Integer, Boolean>() {
+			@Override
+			public Boolean call(Integer arg) {
+				return arg % 2 != 0;
+			}
+		});
+		
+		Collections.sort(actual);
+		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testCollect() {
-		fail("Not yet implemented");
+		List<Integer> expected = Arrays.asList(2, 4, 6, 8, 10, 12, 14, 16, 18, 20);
+		
+		List<Integer> actual = list.collect(new Closure<Integer, Integer>() {
+			@Override
+			public Integer call(Integer it) {
+				return it * 2;
+			}
+		});
+		
+		Collections.sort(actual);
+		assertEquals(expected, actual);
 	}
 
 	@Test
@@ -105,7 +142,7 @@ public class RichListTest {
 	@Test
 	public void testMax() {
 		Integer expected = 10;
-		Integer actual = list.min();
+		Integer actual = list.max();
 		assertEquals(expected, actual);
 	}
 
@@ -114,8 +151,7 @@ public class RichListTest {
 		List<Integer> expected = new ArrayList<Integer>(testData1);
 		Collections.sort(expected);
 		
-		list.sort();
-		List<Integer> actual = new ArrayList<Integer>(list.getDelegate());
+		List<Integer> actual = list.sort();
 		for(int i = 0; i < list.size(); i++){
 			assertEquals("Items not equal", expected.get(0), actual.get(0));
 		}
@@ -131,13 +167,7 @@ public class RichListTest {
 			}
 		});
 		
-		list.sort(new Closure<Tuple2<Integer,Integer>, Boolean>() {
-
-			public Boolean call(Tuple2<Integer, Integer> t) {
-				return t.b > t.a;
-			}
-		});
-		List<Integer> actual = new ArrayList<Integer>(list.getDelegate());
+		List<Integer> actual = list.sort(new DesendingOrder<Integer>());
 		for(int i = 0; i < list.size(); i++){
 			assertEquals("Items not equal", expected.get(0), actual.get(0));
 		}

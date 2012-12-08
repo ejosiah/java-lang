@@ -8,12 +8,18 @@ import java.util.concurrent.Callable;
 
 import com.josiahebhomenye.Closure;
 import com.josiahebhomenye.Visitor;
+import com.josiahebhomenye.algorithm.sort.InsertionSort;
+import com.josiahebhomenye.algorithm.sort.QuickSort2;
 import com.josiahebhomenye.function.Tuple2;
 
 import lombok.Delegate;
 
 @SuppressWarnings("all")
 public class RichList<E>{
+	
+	private static final AsendingOrder ASENDING_ORDER = new AsendingOrder();
+	private static final Smaller SMALLER = new Smaller();
+	private static final Larger LARGER = new Larger();
 	
 	@Delegate(types=List.class)
 	private final List list;
@@ -79,25 +85,29 @@ public class RichList<E>{
 	
 	public E min(){
 		elementIsComparable();
-		return fold(new Smaller());
+		return fold(SMALLER);
 		
 	}
 	
 	public E max(){
 		elementIsComparable();
-		return fold(new Larger());
+		return fold(LARGER);
 		
 	}
 	
-	public void sort(){
+	public List<E> sort(){
 		elementIsComparable();
-		// TODO
+		return sort(ASENDING_ORDER);
 		
 	}
 	
-	public void sort(Closure<Tuple2<E, E>, Boolean> comparator){
+	public List<E> sort(Closure<Tuple2<E, E>, Boolean> comparator){
 		elementIsComparable();
-		// TODO
+		final List<E> list = new ArrayList<E>(this.list);
+		if(list.size() < 7){
+			return new InsertionSort().sort(list);
+		}
+		return new QuickSort2().sort(list, new ComparatorAdaptor(comparator));
 	}
 	
 	private void elementIsComparable(){
