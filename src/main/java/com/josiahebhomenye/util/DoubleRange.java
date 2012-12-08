@@ -1,6 +1,6 @@
 package com.josiahebhomenye.util;
 
-public class DoubleRange extends Range<Double> {
+public final class DoubleRange extends Range<Double> {
 
 	public DoubleRange(Double lower, Double upper) {
 		super(lower, upper);

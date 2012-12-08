@@ -2,7 +2,7 @@ package com.josiahebhomenye.util;
 
 import java.math.BigDecimal;
 
-public class BigDecimalRange extends Range<BigDecimal> {
+public final class BigDecimalRange extends Range<BigDecimal> {
 
 	public BigDecimalRange(BigDecimal lower, BigDecimal upper) {
 		super(lower, upper);

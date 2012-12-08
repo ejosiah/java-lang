@@ -1,6 +1,6 @@
 package com.josiahebhomenye.util;
 
-public class ShortRange extends Range<Short> {
+public final class ShortRange extends Range<Short> {
 
 	public ShortRange(Short lower, Short upper) {
 		super(lower, upper);

@@ -1,6 +1,6 @@
 package com.josiahebhomenye.util;
 
-public class LongRange extends Range<Long> {
+public final class LongRange extends Range<Long> {
 
 	public LongRange(Long lower, Long upper) {
 		super(lower, upper);

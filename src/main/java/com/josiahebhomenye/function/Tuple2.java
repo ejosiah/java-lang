@@ -2,7 +2,7 @@ package com.josiahebhomenye.function;
 
 import java.io.Serializable;
 
-public class Tuple2<A,B> implements Serializable{
+public final class Tuple2<A,B> implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	

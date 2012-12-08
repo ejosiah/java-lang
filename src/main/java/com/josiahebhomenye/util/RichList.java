@@ -2,6 +2,7 @@ package com.josiahebhomenye.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -52,7 +53,7 @@ public class RichList<E>{
 		return closure.call(list);
 	}
 	
-	public List<E> collect(final Closure<E, Boolean> closure){
+	public List<E> findAll(final Closure<E, Boolean> closure){
 		final List<E> list = new ArrayList<E>(this.list);
 		final List<E> result = new ArrayList<E>();
 		
@@ -65,7 +66,48 @@ public class RichList<E>{
 		return result;
 	}
 	
+	public List<E> collect(final Closure<E, E> closure){
+		final List<E> list = new ArrayList<E>(this.list);
+		final List<E> result = new ArrayList<E>();
+		
+		for(E elm : list){
+			result.add(closure.call(elm));
+		}
+		
+		return result;
+	}
+	
+	public E min(){
+		elementIsComparable();
+		return fold(new Smaller());
+		
+	}
+	
+	public E max(){
+		elementIsComparable();
+		return fold(new Larger());
+		
+	}
+	
+	public void sort(){
+		elementIsComparable();
+		// TODO
+		
+	}
+	
+	public void sort(Closure<Tuple2<E, E>, Boolean> comparator){
+		elementIsComparable();
+		// TODO
+	}
+	
+	private void elementIsComparable(){
+		if(!(list.get(0) instanceof Comparable)){
+			throw new UnsupportedOperationException("Element type is not an instance of Comparable");
+		}
+	}
+	
 	public List<E> getDelegate(){
 		return list;
 	}
+
 }

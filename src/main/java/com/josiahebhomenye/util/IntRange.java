@@ -1,6 +1,6 @@
 package com.josiahebhomenye.util;
 
-public class IntRange extends Range<Integer> {
+public final class IntRange extends Range<Integer> {
 
 	public IntRange(Integer lower, Integer upper) {
 		super(lower, upper);

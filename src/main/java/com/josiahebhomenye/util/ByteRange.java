@@ -1,6 +1,6 @@
 package com.josiahebhomenye.util;
 
-public class ByteRange extends Range<Byte> {
+public final class ByteRange extends Range<Byte> {
 
 	public ByteRange(Byte lower, Byte upper) {
 		super(lower, upper);

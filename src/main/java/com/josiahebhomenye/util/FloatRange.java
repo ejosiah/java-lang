@@ -1,6 +1,6 @@
 package com.josiahebhomenye.util;
 
-public class FloatRange extends Range<Float> {
+public final class FloatRange extends Range<Float> {
 
 	public FloatRange(Float lower, Float upper) {
 		super(lower, upper);

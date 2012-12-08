@@ -2,7 +2,7 @@ package com.josiahebhomenye.util;
 
 import java.math.BigInteger;
 
-public class BigIntRange extends Range<BigInteger> {
+public final class BigIntRange extends Range<BigInteger> {
 
 	public BigIntRange(BigInteger lower, BigInteger upper) {
 		super(lower, upper);
