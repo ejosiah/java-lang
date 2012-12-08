@@ -47,9 +47,22 @@ public class RichList<E>{
 		}
 	}
 	
-	public List<E> collect(final Closure<List<E>, List<E>> closure){
+	public List<E> use(final Closure<List<E>, List<E>> closure){
 		final List<E> list = new ArrayList<E>(this.list);
 		return closure.call(list);
+	}
+	
+	public List<E> collect(final Closure<E, Boolean> closure){
+		final List<E> list = new ArrayList<E>(this.list);
+		final List<E> result = new ArrayList<E>();
+		
+		for(E elm : list){
+			if(closure.call(elm)){
+				result.add(elm);
+			}
+		}
+		
+		return result;
 	}
 	
 	public List<E> getDelegate(){
