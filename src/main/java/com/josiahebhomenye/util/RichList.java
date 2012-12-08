@@ -10,6 +10,7 @@ import com.josiahebhomenye.Closure;
 import com.josiahebhomenye.Visitor;
 import com.josiahebhomenye.algorithm.sort.InsertionSort;
 import com.josiahebhomenye.algorithm.sort.QuickSort2;
+import com.josiahebhomenye.algorithm.sort.Sorter;
 import com.josiahebhomenye.function.Tuple2;
 
 import lombok.Delegate;
@@ -20,6 +21,8 @@ public class RichList<E>{
 	private static final AsendingOrder ASENDING_ORDER = new AsendingOrder();
 	private static final Smaller SMALLER = new Smaller();
 	private static final Larger LARGER = new Larger();
+	private static final Sorter QUICK_SORT = new QuickSort2();
+	private static final Sorter INSERTION_SORT = new InsertionSort();
 	
 	@Delegate(types=List.class)
 	private final List list;
@@ -105,9 +108,9 @@ public class RichList<E>{
 		elementIsComparable();
 		final List<E> list = new ArrayList<E>(this.list);
 		if(list.size() < 7){
-			return new InsertionSort().sort(list);
+			return INSERTION_SORT .sort(list);
 		}
-		return new QuickSort2().sort(list, new ComparatorAdaptor(comparator));
+		return QUICK_SORT.sort(list, new ComparatorAdaptor(comparator));
 	}
 	
 	private void elementIsComparable(){
