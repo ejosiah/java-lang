@@ -108,7 +108,7 @@ public class RichList<E>{
 		elementIsComparable();
 		final List<E> list = new ArrayList<E>(this.list);
 		if(list.size() < 7){
-			return INSERTION_SORT .sort(list);
+			return INSERTION_SORT .sort(list, new ComparatorAdaptor(comparator));
 		}
 		return QUICK_SORT.sort(list, new ComparatorAdaptor(comparator));
 	}

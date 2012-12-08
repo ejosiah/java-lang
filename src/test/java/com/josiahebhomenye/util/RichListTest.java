@@ -172,6 +172,39 @@ public class RichListTest {
 			assertEquals("Items not equal", expected.get(0), actual.get(0));
 		}
 	}
+	
+	@Test
+	public void testSortWithLessThan7Items() {
+		List<Integer> testData = Arrays.asList(8, 2, 6, 4, 1);
+		
+		List<Integer> expected = new ArrayList<Integer>(testData);
+		Collections.sort(expected);
+		
+		RichList<Integer> list = RichList.enrich(testData);
+		List<Integer> actual = list.sort();
+		for(int i = 0; i < list.size(); i++){
+			assertEquals("Items not equal", expected.get(0), actual.get(0));
+		}
+	}
+	
+	@Test
+	public void testSortWithClosureWithLessThan7Items() {
+		List<Integer> testData = Arrays.asList(8, 2, 6, 4, 1);
+		
+		List<Integer> expected = new ArrayList<Integer>(testData);
+		Collections.sort(expected, new Comparator<Integer>() {	// sort in desending order
+			
+			public int compare(Integer o1, Integer o2) {
+				return o2.compareTo(o1);
+			}
+		});
+		
+		RichList<Integer> list = RichList.enrich(testData);
+		List<Integer> actual = list.sort(new DesendingOrder<Integer>());
+		for(int i = 0; i < list.size(); i++){
+			assertEquals("Items not equal", expected.get(0), actual.get(0));
+		}
+	}
 
 
 }
