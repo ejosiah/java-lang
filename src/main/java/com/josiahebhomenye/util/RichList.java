@@ -54,7 +54,7 @@ public class RichList<E>{
 		}
 	}
 	
-	public List<E> use(final Closure<List<E>, List<E>> closure){
+	public List<E> apply(final Closure<List<E>, List<E>> closure){
 		final List<E> list = new ArrayList<E>(this.list);
 		return closure.call(list);
 	}

@@ -84,7 +84,7 @@ public class RichListTest {
 		// this test doesn't really make any sense so don't try to understand it :)
 		final List<Integer> expected = Arrays.asList(1, 2, 3, 4 ,5);
 		
-		List<Integer> actual = list.use(new Closure<List<Integer>, List<Integer>>() {
+		List<Integer> actual = list.apply(new Closure<List<Integer>, List<Integer>>() {
 
 			@Override
 			public List<Integer> call(List<Integer> list) {
