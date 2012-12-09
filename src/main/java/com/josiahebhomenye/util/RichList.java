@@ -20,7 +20,7 @@ public class RichList<E>{
 	
 	private static final AsendingOrder ASENDING_ORDER = new AsendingOrder();
 	private static final Smaller SMALLER = new Smaller();
-	private static final Larger LARGER = new Larger();
+	private static final Bigger BIGGER = new Bigger();
 	private static final Sorter QUICK_SORT = new QuickSort2();
 	private static final Sorter INSERTION_SORT = new InsertionSort();
 	
@@ -94,7 +94,7 @@ public class RichList<E>{
 	
 	public E max(){
 		elementIsComparable();
-		return fold(LARGER);
+		return fold(BIGGER);
 		
 	}
 	
