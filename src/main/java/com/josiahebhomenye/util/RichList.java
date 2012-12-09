@@ -127,16 +127,19 @@ public class RichList<E>{
 	}
 	
 	private List<E> createList(boolean copy){
-		List<E> list = null;
-		try {
-			list = (List<E>) this.list.getClass().newInstance();
-		} catch (Exception e) {
-			list = new ArrayList<E>();
-		}
+		List<E> list = createList();
 		if(copy){
 			list.addAll(this.list);
 		}
 		return list;
+	}
+	
+	private List<E> createList(){
+		try {
+			return (List<E>) this.list.getClass().newInstance();
+		} catch (Exception e) {
+			return new ArrayList<E>();
+		}
 	}
 
 }
