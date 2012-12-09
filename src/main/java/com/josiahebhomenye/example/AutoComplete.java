@@ -19,7 +19,7 @@ public class AutoComplete extends JFrame implements KeyListener {
 	private final URL url;
 	
 	public AutoComplete() throws MalformedURLException{
-		url = new URL("http://josiahebhomenye.com/words");
+		url = new URL("http://www.josiahebhomenye.com/words");
 	}
 	
 	public void initialise() throws Exception{
