@@ -205,6 +205,58 @@ public class RichListTest {
 			assertEquals("Items not equal", expected.get(0), actual.get(0));
 		}
 	}
+	
+	@Test
+	public void testComparableMethodsOnNonComparableObject(){
+		RichList<SomeObject> someObjects = RichList.enrich(createSomeObjectList());
+		
+		testSorting(someObjects);
+		testMin(someObjects);
+		testMax(someObjects);
 
+	}
+	
+	private List<SomeObject> createSomeObjectList(){
+		List<SomeObject> list = new ArrayList<SomeObject>();
+		for(Integer i : new IntRange(1, 6)){
+			list.add(new SomeObject(i.toString()));
+		}
+		return list;
+	}
+	
+	private static class SomeObject{
+		String value;
+		
+		SomeObject(String value){
+			this.value = value;
+		}
+	}
+	
+	private void testSorting(RichList<SomeObject> someObjects){
+		try {
+			someObjects.sort();
+			fail("Should not be able to sort on someObject");
+		} catch (UnsupportedOperationException e) {
+			// as expected
+		}
+	}
+	
+	private void testMin(RichList<SomeObject> someObjects){
+		try {
+			someObjects.min();
+			fail("Should not be able to get min on someObject");
+		} catch (UnsupportedOperationException e) {
+			// as expected
+		}
+	}
+	
+	private void testMax(RichList<SomeObject> someObjects){
+		try {
+			someObjects.max();
+			fail("Should not be able to get max on someObject");
+		} catch (UnsupportedOperationException e) {
+			// as expected
+		}
+	}
 
 }

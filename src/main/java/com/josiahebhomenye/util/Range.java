@@ -5,7 +5,7 @@ import java.util.List;
 
 import lombok.Delegate;
 
-public abstract class Range<N extends Number> {
+public abstract class Range<N extends Number> implements Iterable<N> {
 	
 	@Delegate
 	protected final RichList<N> range = RichList.enrich(new ArrayList<N>());

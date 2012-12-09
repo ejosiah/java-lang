@@ -1,10 +1,7 @@
 package com.josiahebhomenye.util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import com.josiahebhomenye.Closure;
 import com.josiahebhomenye.Visitor;
@@ -36,8 +33,7 @@ public class RichList<E>{
 	}
 	
 	public E fold(final E initialValue, final Closure<Tuple2<E, E>, E> callable){
-		final List<E> list = new ArrayList<E>();
-		list.addAll(this.list);
+		final List<E> list = copyList();
 		
 		E result = initialValue == null ? list.remove(0) : initialValue;
 		while(!list.isEmpty()){
@@ -58,13 +54,13 @@ public class RichList<E>{
 	}
 	
 	public List<E> apply(final Closure<List<E>, List<E>> closure){
-		final List<E> list = new ArrayList<E>(this.list);
+		final List<E> list = copyList();
 		return closure.call(list);
 	}
 	
 	public List<E> findAll(final Closure<E, Boolean> closure){
-		final List<E> list = new ArrayList<E>(this.list);
-		final List<E> result = new ArrayList<E>();
+		final List<E> list = copyList();
+		final List<E> result = newList();
 		
 		for(E elm : list){
 			if(closure.call(elm)){
@@ -76,8 +72,8 @@ public class RichList<E>{
 	}
 	
 	public List<E> collect(final Closure<E, E> closure){
-		final List<E> list = new ArrayList<E>(this.list);
-		final List<E> result = new ArrayList<E>();
+		final List<E> list = copyList();
+		final List<E> result = newList();
 		
 		for(E elm : list){
 			result.add(closure.call(elm));
@@ -100,13 +96,12 @@ public class RichList<E>{
 	
 	public List<E> sort(){
 		elementIsComparable();
-		return sort(ASENDING_ORDER);
-		
+		return sort(ASENDING_ORDER);	
 	}
 	
 	public List<E> sort(Closure<Tuple2<E, E>, Boolean> comparator){
 		elementIsComparable();
-		final List<E> list = new ArrayList<E>(this.list);
+		final List<E> list = copyList();
 		if(list.size() < 7){
 			return INSERTION_SORT .sort(list, new ComparatorAdaptor(comparator));
 		}
@@ -120,6 +115,27 @@ public class RichList<E>{
 	}
 	
 	public List<E> getDelegate(){
+		return list;
+	}
+	
+	private List<E> copyList(){
+		return createList(true);
+	}
+	
+	private List<E> newList(){
+		return createList(false);
+	}
+	
+	private List<E> createList(boolean copy){
+		List<E> list = null;
+		try {
+			list = (List<E>) this.list.getClass().newInstance();
+		} catch (Exception e) {
+			list = new ArrayList<E>();
+		}
+		if(copy){
+			list.addAll(this.list);
+		}
 		return list;
 	}
 
