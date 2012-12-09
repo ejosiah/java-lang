@@ -31,7 +31,7 @@ public class RichList<E>{
 		this.list = list;
 	}
 	
-	public static <E> RichList<E> enrich(List<E> list){
+	public static <E> RichList<E> enrich(final List<E> list){
 		return new RichList<E>(list);
 	}
 	
