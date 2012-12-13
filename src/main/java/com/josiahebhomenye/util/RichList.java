@@ -12,6 +12,13 @@ import com.josiahebhomenye.function.Tuple2;
 
 import lombok.Delegate;
 
+/**
+ * Added extra functionality to java.util.List classes
+ * 
+ * @author jay
+ *
+ * @param <E> element type
+ */
 @SuppressWarnings("all")
 public class RichList<E>{
 	

@@ -4,7 +4,7 @@
 	<groupId>com.josiahebhomenye</groupId>
 	<artifactId>java-lang</artifactId>
 	<name>java lang</name>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<description>provides groovy, scalar like extenstions to java APIs</description>
 	<dependencies>
 		<dependency>
